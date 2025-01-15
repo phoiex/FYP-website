@@ -15,43 +15,34 @@
             justify-content: center;
             min-height: 100vh;
         }
-        h1 {
-            color: #333;
-            text-align: center;
-            margin: 20px 0;
-            font-size: 2.5em;
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 20px;
+            width: 90%;
+            height: 90vh;
         }
-        iframe {
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            height: 300px; /* 调整 iframe 高度 */
-        }
-        form {
-            width: 80%;
-            margin-top: 20px;
-            padding: 20px;
+        .section {
             background: white;
             border: 2px solid #ddd;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        label {
-            display: block;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-        textarea, input {
-            width: 100%;
-            margin-top: 5px;
-            margin-bottom: 15px;
             padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-sizing: border-box;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
         }
         button {
+            margin-top: 10px;
             background-color: #007BFF;
             color: white;
             padding: 10px 20px;
@@ -62,21 +53,47 @@
         button:hover {
             background-color: #0056b3;
         }
+        .success-message {
+            color: green;
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
     <h1>Homepage of Waterfall Model</h1>
-    <iframe 
-        src="https://copilotstudio.microsoft.com/environments/Default-76eeec46-fe40-4e1b-ab42-1d6d9f91b8a9/bots/crecf_KPfMFJk7duIysZGG55h-z/webchat?__version__=2" 
-        frameborder="0">
-    </iframe>
-    <form method="post">
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
-    {% if success %}
-    <p style="color: green; text-align: center; font-size: 1.2em; margin-top: 20px;">
-        Form submitted successfully!</p>
-    {% endif %}   
+    <div class="container">
+        
+        <div class="section" id="report">
+            <h2>Software Engineering Plan</h2>
+            <p>Content placeholder for the software engineering plan report.</p>
+        </div>
+
+        
+        <div class="section" id="chatbox">
+            <iframe 
+                src="https://copilotstudio.microsoft.com/environments/Default-76eeec46-fe40-4e1b-ab42-1d6d9f91b8a9/bots/crecf_KPfMFJk7duIysZGG55h-z/webchat?__version__=2" 
+                frameborder="0">
+            </iframe>
+        </div>
+
+        
+        <div class="section" id="form-section">
+            <form method="post">
+                {{ form.as_p }}
+                <button type="submit">Submit</button>
+            </form>
+            {% if success %}
+            <p class="success-message">Form submitted successfully!</p>
+            {% endif %}
+        </div>
+
+        
+        <div class="section" id="gantt-chart">
+            <h2>Gantt Chart</h2>
+            <p>Placeholder for the Gantt chart.</p>
+        </div>
+    </div>
 </body>
 </html>

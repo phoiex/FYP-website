@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>用户输入展示</title>
     <script>
-        // 提交数据的函数
         async function submitInput() {
-            const userInput = document.getElementById("userInput").value; // 获取用户输入
-            const displayArea = document.getElementById("displayArea"); // 展示区域
+            const userInput = document.getElementById("userInput").value; 
+            const displayArea = document.getElementById("displayArea"); 
 
             try {
                 // 发起 AJAX 请求
@@ -24,9 +23,9 @@
 
                 const data = await response.json();
                 if (response.ok) {
-                    displayArea.textContent = data.message; // 显示存储的数据
+                    displayArea.textContent = data.message; 
                 } else {
-                    displayArea.textContent = data.error; // 显示错误信息
+                    displayArea.textContent = data.error; 
                 }
             } catch (error) {
                 displayArea.textContent = "请求失败，请重试！";
@@ -44,7 +43,6 @@
 
     <h2>展示最新数据：</h2>
     <div id="displayArea" style="border: 1px solid #ccc; padding: 10px; min-height: 50px;">
-        <!-- 服务器返回的内容将显示在这里 -->
     </div>
 </body>
 </html>
