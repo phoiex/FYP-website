@@ -55,7 +55,7 @@ def receive_input(request):
         if not user_input:
             return JsonResponse({'error': '输入不能为空'}, status=400)
 
-        # 获取 CustomerInfo 对象
+        
         customer_name = "0"  # 固定客户名称
         try:
             customer_info = CustomerInfo.objects.get(customer_name=customer_name)
@@ -70,3 +70,24 @@ def receive_input(request):
         return JsonResponse({'message': f'已存储数据: {copilot_response.response_data}'})
 
     return JsonResponse({'error': '只支持 POST 请求'}, status=405)
+
+
+
+
+
+
+
+
+from django.http import JsonResponse
+
+def oauth_callback(request):
+    # 从回调中获取授权码
+    code = request.GET.get('code')
+    state = request.GET.get('state')
+
+    if not code:
+        return JsonResponse({'error': 'No authorization code provided'}, status=400)
+
+    # 打印授权码，或者直接返回响应
+    return JsonResponse({'code': code, 'state': state})
+
