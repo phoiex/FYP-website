@@ -1,99 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage of Waterfall Model</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
-        .container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            gap: 20px;
-            width: 90%;
-            height: 90vh;
-        }
-        .section {
-            background: white;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            padding: 10px;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 10px;
-        }
-        button {
-            margin-top: 10px;
-            background-color: #007BFF;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .success-message {
-            color: green;
-            text-align: center;
-            font-size: 1.2em;
-            margin-top: 10px;
-        }
-    </style>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <h1>Homepage of Waterfall Model</h1>
+    <h1>start from here</h1>
     <div class="container">
-        
-        <div class="section" id="report">
-            <h2>Software Engineering Plan</h2>
-            <p>Content placeholder for the software engineering plan report.</p>
-        </div>
-
-        
-        <div class="section" id="chatbox">
-            <iframe 
-                src="https://copilotstudio.microsoft.com/environments/Default-76eeec46-fe40-4e1b-ab42-1d6d9f91b8a9/bots/crecf_KPfMFJk7duIysZGG55h-z/webchat?__version__=2" 
-                frameborder="0">
-            </iframe>
-        </div>
-
-        
+        <!-- Project Form Section -->
         <div class="section" id="form-section">
-            <form method="post">
+            <form method="post" id="project-form">
                 {{ form.as_p }}
                 <button type="submit">Submit</button>
             </form>
             {% if success %}
-            <p class="success-message">Form submitted successfully!</p>
+                <p class="success-message">Form submitted successfully!</p>
             {% endif %}
         </div>
 
-        
+        <!-- Software Engineering Plan & Gantt Chart Section -->
+        <div class="section" id="plan-section">
+            <h2>Software Engineering Plan</h2>
+            <p>Content placeholder for the software engineering plan report.</p>
+        </div>
+
         <div class="section" id="gantt-chart">
             <h2>Gantt Chart</h2>
-            <p>Placeholder for the Gantt chart.</p>
+            <pre class="mermaid fade-in">
+                gantt
+                    title Software Development Process
+                    dateFormat  YYYY-MM-DD
+                    section Planning
+                    Requirements Gathering :done, req1, 2025-01-01, 2025-01-05
+                    System Design           :active, design1, 2025-01-06, 2025-01-10
+                    section Development
+                    Implementation          :dev, 2025-01-11, 2025-01-20
+                    Testing                 :test, 2025-01-21, 2025-01-25
+                    section Deployment
+                    Deployment to Production:deploy, 2025-01-26, 2025-01-28
+            </pre>
         </div>
     </div>
+
+    <!-- Chatbox Button -->
+    <div id="chatbox" onclick="toggleChatInterface()">
+        💬
+    </div>
+
+    <!-- Chat Interface -->
+    <div id="chat-interface">
+        <iframe 
+            src="https://copilotstudio.microsoft.com/environments/Default-76eeec46-fe40-4e1b-ab42-1d6d9f91b8a9/bots/crecf_KPfMFJk7duIysZGG55h-z/webchat?__version__=2" 
+            frameborder="0">
+        </iframe>
+    </div>
+
+    <script>
+        document.getElementById("project-form").onsubmit = function() {
+            document.getElementById("form-section").style.display = "none";
+            document.getElementById("plan-section").style.display = "block";
+            document.getElementById("gantt-chart").style.display = "block";
+            return false;  // Prevent form submission to allow for dynamic changes
+        };
+
+        // Toggle the chat interface
+        function toggleChatInterface() {
+            var chatInterface = document.getElementById("chat-interface");
+            if (chatInterface.style.display === "none" || chatInterface.style.display === "") {
+                chatInterface.style.display = "block";
+            } else {
+                chatInterface.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
